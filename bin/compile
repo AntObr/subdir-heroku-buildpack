@@ -44,7 +44,10 @@ if [ -f $ENV_DIR/PROJECT_PATH ]; then
 		ls -l $BUILD_DIR
 		echo "#################"
 		if [ -d $BUILD_DIR/libs ]; then
-			echo "### libs exists in build dir ###"
+			echo "### libs exists as directory in build dir ###"
+		fi
+		if [ -f $BUILD_DIR/libs ]; then
+			echo "### libs exists as file in build dir ###"
 		fi
 		echo "       copying preserved lib work dir from cache $LIBRARY_TMP_DIR to build dir $BUILD_DIR"
 		cp -R $LIBRARY_TMP_DIR/. $BUILD_DIR/
