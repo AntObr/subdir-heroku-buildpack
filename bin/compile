@@ -17,6 +17,16 @@ if [ -f $ENV_DIR/PROJECT_PATH ]; then
 		TMP_DIR=`mktemp -d $CACHE_DIR/subdirXXXXX`
 		echo "       created tmp dir: $TMP_DIR"
 		echo "       moving working dir: $PROJECT_PATH to $TMP_DIR"
+		echo "##### DEBUG #####"
+		echo "ENV_DIR/PROJECT_PATH"
+		ls -l $ENV_DIR/PROJECT_PATH
+		echo "BUILD_DIR/PROJECT_PATH"
+		ls -l $BUILD_DIR/$PROJECT_PATH
+		echo "TMP_DIR"
+		ls -l $TMP_DIR
+		echo "BUILD_DIR/LIBRARY_PATH"
+		ls -l $BUILD_DIR/$LIBRARY_PATH
+		echo "#################"
 		cp -R $BUILD_DIR/$PROJECT_PATH/. $TMP_DIR/
 		if [ -d $BUILD_DIR/$LIBRARY_PATH ]; then
 			LIBRARY_PATH=`cat $ENV_DIR/LIBRARY_PATH`
@@ -42,5 +52,3 @@ fi
 
 echo "PROJECT_PATH is undefined"
 exit 1
-
-
