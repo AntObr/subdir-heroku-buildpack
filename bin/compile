@@ -43,6 +43,9 @@ if [ -f $ENV_DIR/PROJECT_PATH ]; then
 		echo "##### DEBUG #####"
 		ls -l $BUILD_DIR
 		echo "#################"
+		if [ -d $BUILD_DIR/libs ]; then
+			echo "### libs exists in build dir ###"
+		fi
 		echo "       copying preserved lib work dir from cache $LIBRARY_TMP_DIR to build dir $BUILD_DIR"
 		cp -R $LIBRARY_TMP_DIR/. $BUILD_DIR/
 		echo "       cleaning tmp dir $TMP_DIR"
