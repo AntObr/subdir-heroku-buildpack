@@ -17,16 +17,6 @@ if [ -f $ENV_DIR/PROJECT_PATH ]; then
 		TMP_DIR=`mktemp -d $CACHE_DIR/subdirXXXXX`
 		echo "       created tmp dir: $TMP_DIR"
 		echo "       moving working dir: $PROJECT_PATH to $TMP_DIR"
-		echo "##### DEBUG #####"
-		echo "ENV_DIR/PROJECT_PATH"
-		ls -l $ENV_DIR/PROJECT_PATH
-		echo "BUILD_DIR/PROJECT_PATH"
-		ls -l $BUILD_DIR/$PROJECT_PATH
-		echo "TMP_DIR"
-		ls -l $TMP_DIR
-		echo "BUILD_DIR/LIBRARY_PATH"
-		ls -l $BUILD_DIR/$LIBRARY_PATH
-		echo "#################"
 		cp -R $BUILD_DIR/$PROJECT_PATH/. $TMP_DIR/
 		if [ -d $BUILD_DIR/$LIBRARY_PATH ]; then
 			LIBRARY_PATH=`cat $ENV_DIR/LIBRARY_PATH`
@@ -40,17 +30,9 @@ if [ -f $ENV_DIR/PROJECT_PATH ]; then
 		rm -rf $BUILD_DIR/*
 		echo "       copying preserved work dir from cache $TMP_DIR to build dir $BUILD_DIR"
 		cp -R $TMP_DIR/. $BUILD_DIR/
-		echo "##### DEBUG #####"
-		ls -l $BUILD_DIR
-		echo "#################"
-		if [ -d $BUILD_DIR/libs ]; then
-			echo "### libs exists as directory in build dir ###"
-		fi
-		if [ -f $BUILD_DIR/libs ]; then
-			echo "### libs exists as file in build dir ###"
-		fi
 		if [ -h $BUILD_DIR/libs ]; then
-			echo "### libs exists as symlink in build dir ###"
+			echo "Removing libs symlink"
+			rm -rf $BUILD_DIR/libs
 		fi
 		echo "       copying preserved lib work dir from cache $LIBRARY_TMP_DIR to build dir $BUILD_DIR"
 		cp -R $LIBRARY_TMP_DIR/. $BUILD_DIR/
